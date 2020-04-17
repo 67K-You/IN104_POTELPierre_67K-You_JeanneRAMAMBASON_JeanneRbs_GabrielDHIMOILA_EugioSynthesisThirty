@@ -5,8 +5,8 @@ class VideogameError(Exception): pass
 class OutOfRangeError(VideogameError): pass
 class NotIntegerError(VideogameError): pass
 class UnknownTrackError(VideogameError): pass
-class OutOfRangeError(VideogameError): pass
-class NotIntergerError(VideogameError): pass
+class UnknownPlayerError(VideogameError): pass
+class UnknownWeaponError(VideogameError):pass
 
 class VideoGames:
 	def __init__(self,setting,players,agerestriction):

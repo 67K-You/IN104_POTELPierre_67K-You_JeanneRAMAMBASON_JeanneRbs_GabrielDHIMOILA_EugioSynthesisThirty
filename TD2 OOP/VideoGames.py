@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+
+#Define exceptions
+class VideogameError(Exception): pass
+class OutOfRangeError(VideogameError): pass
+class NotIntegerError(VideogameError): pass
+class UnknownTrackError(VideogameError): pass
 
 class VideoGames:
 	def __init__(self,setting,players,agerestriction):
@@ -11,22 +16,40 @@ class VideoGames:
 		self.players += newplayers
 		print('%d players have joined the game, you are now %d playing.\n'%(newplayers,self.players))
 
-
+KnownTracks=("Mario Kart Stadium",
+"Water Park",
+"Sweet Sweet Canyon",
+"Thwomp Ruins",
+"Mario Circuit",
+"Toad Harbour",
+"Twisted Mansion",
+"Shy Guy Falls",
+"Sunshine Airport",
+"Dolphin Shoals",
+"Electrodrome",
+"Mount Wario",
+"Cloudtop Cruise",
+"Bone-Dry Dunes",
+"Bowser's Castle"
+"Rainbow Road")
 
 class Racing(VideoGames):
-	def __spe__(self,track):
-		self.track=track
-		print('The race will happen in %s\n' % track)
+	def spe(self,track):
+		if track not in KnownTracks:
+			raise UnknownTrackError, "This track is not part of the game"
+		else:
+			self.track=track
+			print('The race will happen in %s\n' % track)
+		return self.track
 	def EngineCylinder(self,CC):
-		self.CC=CC
-		print('You chose %d CC. 3, 2, 1 GO!\n' % CC)
-
-class FightingError(Exception): pass
-class UnknownPlayerError(FightingError): pass
-class UnknownWeaponError(FightingError): pass
-class OutOfRangeError(FightingError): pass
-class NotIntergerError(FightingError): pass
-				
+		if CC<0:
+			raise OutOfRangeError, "CC can't be a negative number"
+		elif not CC == int(CC):
+			raise NotIntegerError, "CC can't be a decimal number"
+		else:
+			self.CC=CC
+			print('You chose %d CC. 3, 2, 1 GO!\n' % CC)
+		
 knownNames = ('Mario' , 'Pit' , 'Donkey Kong', 'Link', 'Kirby', 'Yoshi' , 'Fox', 'Pikachu', 'Luigi', 'Peach', 'Ness' , 'Zelda', 'Captain Falcon')
 knownWeapons = ('Super Launch Star', 'Smash Ball', 'Poké Ball', 'Beam Sword', 'Super Scope', 'Banana Gun' , 'Drill', 'Super Mushroom')
 
@@ -57,7 +80,3 @@ class Fighting(VideoGames):
 #MarioKart.__spe__('Dry Dry Desert')
 #MarioKart.JoinGame(2)
 #MarioKart.EngineCylinder(150)
-#SmashBros = Fighting('Desert',2,13)
-#SmashBros.nameofplayer1('Peach')
-#SmashBros.equipweapon('Smash Ball')
-#SmashBros.timefight(6)

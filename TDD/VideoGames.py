@@ -5,6 +5,8 @@ class VideogameError(Exception): pass
 class OutOfRangeError(VideogameError): pass
 class NotIntegerError(VideogameError): pass
 class UnknownTrackError(VideogameError): pass
+class OutOfRangeError(VideogameError): pass
+class NotIntergerError(VideogameError): pass
 
 class VideoGames:
 	def __init__(self,setting,players,agerestriction):
@@ -80,3 +82,7 @@ class Fighting(VideoGames):
 #MarioKart.__spe__('Dry Dry Desert')
 #MarioKart.JoinGame(2)
 #MarioKart.EngineCylinder(150)
+#SmashBros = Fighting('Desert',2,13)
+#SmashBros.nameofplayer1('Peach')
+#SmashBros.equipweapon('Smash Ball')
+#SmashBros.timefight(6)

@@ -1,4 +1,4 @@
-import VideoGames.Fighting.py
+import VideoGames
 import unittest
 
 
@@ -21,3 +21,6 @@ class BadInputFighting(unittest.TestCase):
 
    	def testNonInteger(self):
    		self.assertRaises(VideoGames.NotIntergerError, VideoGames.Fighting.timefight, 0.5)
+		
+if __name__ == "__main__":
+   unittest.main()

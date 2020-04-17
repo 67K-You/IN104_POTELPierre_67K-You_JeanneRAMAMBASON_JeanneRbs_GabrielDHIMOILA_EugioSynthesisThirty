@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 class VideoGames:
 	def __init__(self,setting,players,agerestriction):
 		self.setting = setting
@@ -17,7 +20,13 @@ class Racing(VideoGames):
 	def EngineCylinder(self,CC):
 		self.CC=CC
 		print('You chose %d CC. 3, 2, 1 GO!\n' % CC)
-		
+
+class FightingError(Exception): pass
+class UnknownPlayerError(FightingError): pass
+class UnknownWeaponError(FightingError): pass
+class OutOfRangeError(FightingError): pass
+class NotIntergerError(FightingError): pass
+				
 knownNames = ('Mario' , 'Pit' , 'Donkey Kong', 'Link', 'Kirby', 'Yoshi' , 'Fox', 'Pikachu', 'Luigi', 'Peach', 'Ness' , 'Zelda', 'Captain Falcon')
 knownWeapons = ('Super Launch Star', 'Smash Ball', 'Poké Ball', 'Beam Sword', 'Super Scope', 'Banana Gun' , 'Drill', 'Super Mushroom')
 
@@ -48,3 +57,7 @@ class Fighting(VideoGames):
 #MarioKart.__spe__('Dry Dry Desert')
 #MarioKart.JoinGame(2)
 #MarioKart.EngineCylinder(150)
+#SmashBros = Fighting('Desert',2,13)
+#SmashBros.nameofplayer1('Peach')
+#SmashBros.equipweapon('Smash Ball')
+#SmashBros.timefight(6)

@@ -1,5 +1,13 @@
-import VideoGames
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
+#from videogames import *
+import videogames
 import unittest
+from videogames import *
+
+SmashBros = Fighting("fantasy",2,13)import VideoGames
+
 
 
 class BadInputFighting(unittest.TestCase):

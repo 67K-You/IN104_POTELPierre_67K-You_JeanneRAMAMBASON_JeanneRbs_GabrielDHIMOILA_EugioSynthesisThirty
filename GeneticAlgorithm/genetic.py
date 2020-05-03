@@ -91,7 +91,7 @@ class Population:
 def get_sub_list(liste, pop_size = 1000, iterations = 1000, print_progression = False):
 	pop = Population(pop_size, liste)
 	last_print = -0.01
-	mutation_rate = 2 / len(liste)
+	mutation_rate = 1 / len(liste)
 
 	for i in range(iterations):
 		if print_progression and i / iterations >= last_print + 0.01:
@@ -104,7 +104,7 @@ def get_sub_list(liste, pop_size = 1000, iterations = 1000, print_progression = 
 
 
 if __name__ == "__main__":
-	inputs = list(set([rand.randint(-8192, 8192) * 8192 + rand.randint(-8192, 8192) for i in range(10000)]))
+	inputs = list(set([rand.randint(-8192, 8192) * 8192 + rand.randint(-8192, 8192) for i in range(1000)]))
 	print("inputs =", inputs)
-	outputs = get_sub_list(inputs, pop_size = 1000, iterations = 100, print_progression = True)
+	outputs = get_sub_list(inputs, pop_size = 10000, iterations = 100, print_progression = True)
 	print("\ninputs =", inputs, "\noutputs =", outputs, "\nlength =", len(outputs), "sum =", sum(outputs))

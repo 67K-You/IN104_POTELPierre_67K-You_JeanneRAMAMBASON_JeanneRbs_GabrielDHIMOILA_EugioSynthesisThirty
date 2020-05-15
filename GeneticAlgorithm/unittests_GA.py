@@ -33,11 +33,11 @@ class Testgenerations(unittest.TestCase):
 	def testgenrationsnumberinteger(self):
 	   """Generations.__init__ should fail with non-integer input"""
 	   with self.assertRaises(NotIntegerError):
-			Generations(0.8,1)
+			Generations(0.8,1,10)
 	def testgenerationsnumberpositive(self):
 	   """Generations.__init__ should fail with negative input"""
 	   with self.assertRaises(OutOfRangeError):
-			Generations(-1,1)
+			Generations(-1,1,10)
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ class Individual:
 
 	def mutate_individuals(self): #randomly invert one of the allele of the chromosome
 		p=1/self.size
-		for i in range(1,self.size+1):
+		for i in range(0,self.size):
 			if random.uniform(0,1)<=p:
 				self.chromosome[i]=abs(self.chromosome[i]-1)
 	
@@ -49,5 +49,18 @@ class Population:
 			raise NotIntegerError, "populationsize can't be a decimal number"
 		self.size=populationsize
 		self.generation=np.array(populationsize,dtype=numpy.object)
-		for i in range(1,populationsize+1):
+		for i in range(0,populationsize):
 			self.generation[i]=Individual(chromosomesize)
+
+	
+		def choice_crossover(self):
+			total=0
+			for i in range(self.size):
+				total+=self.generation[i].fitnessscore
+			n=random()
+			i=0
+			s=self.generation[0].fitnessscore/total
+			while i<self.size and s<n:
+				i+=1
+				s+=self.generation[i].fitnessscore/total
+			return i 

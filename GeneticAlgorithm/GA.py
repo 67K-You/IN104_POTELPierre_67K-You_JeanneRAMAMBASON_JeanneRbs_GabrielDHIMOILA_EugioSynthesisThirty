@@ -25,37 +25,37 @@ class Individual:
 				self.chromosome[i]=abs(self.chromosome[i]-1)
 				
 	def crossover_individuals(self,parent_b):
-	n=self.size
-	m=np.size(parent_b)
-	if m!=n :
-		raise IncompatibleChromosome, "size of parent_b and self.chromosone must agree"
-	i=rand.randint(0,n-1)
-	j=rand.randint(0,n-1)
-	enfant=np.zeros(n)
-	s=random()
-	if i>j:
-		temp=i
-		i=j
-		j=temp
-	if s<0.5:
-		if i!=j:
-			enfant[0:i]=self.chrosomone[0:i]
-			enfant[i+1:j]=parent_b[i+1:j]
-			if j<n:
-				enfant[j+1:n-1]=self.chromosone[j+1:n-1]
+		n=self.size
+		m=np.size(parent_b)
+		if m!=n :
+			raise IncompatibleChromosome, "size of parent_b and self.chromosone must agree"
+		i=rand.randint(0,n-1)
+		j=rand.randint(0,n-1)
+		enfant=np.zeros(n)
+		s=random()
+		if i>j:
+			temp=i
+			i=j
+			j=temp
+		if s<0.5:
+			if i!=j:
+				enfant[0:i]=self.chrosomone[0:i]
+				enfant[i+1:j]=parent_b[i+1:j]
+				if j<n:
+					enfant[j+1:n-1]=self.chromosone[j+1:n-1]
+			else:
+				enfant[0:i]=self.chrosomone[0:i]
+				enfant[i+1:n-1]=parent_b[i+1:n-1]
 		else:
-			enfant[0:i]=self.chrosomone[0:i]
-			enfant[i+1:n-1]=parent_b[i+1:n-1]
-	else:
-		if i!=j:
-			enfant[0:i]=parent_b[0:i]
-			enfant[i+1:j]=self.chrosomone[i+1:j]
-			if j<n:
-				enfant[j+1:n-1]=parent_b[j+1:n-1]
-		else:
-			enfant[0:i]=parent_b[0:i]
-			enfant[i+1:n-1]=self.chrosomone[i+1:n-1]		
-	return enfant
+			if i!=j:
+				enfant[0:i]=parent_b[0:i]
+				enfant[i+1:j]=self.chrosomone[i+1:j]
+				if j<n:
+					enfant[j+1:n-1]=parent_b[j+1:n-1]
+			else:
+				enfant[0:i]=parent_b[0:i]
+				enfant[i+1:n-1]=self.chrosomone[i+1:n-1]		
+		return enfant
 
 
 	def evaluate_fitness(self,mu):#the fitness function is designed to maximise the number of integers chosen and minimise the value of their sum. mu is a parameter between 0 and 1 that's meant to give a strong advanage to a solution whose sum is actually 0.

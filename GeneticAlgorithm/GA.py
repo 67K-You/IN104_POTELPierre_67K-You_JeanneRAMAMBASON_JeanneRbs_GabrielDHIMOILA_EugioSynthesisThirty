@@ -6,6 +6,9 @@ import random
 class GeneticsError(Exception): pass
 class OutOfRangeError(GeneticsError): pass
 class NotIntegerError(GeneticsError): pass
+class IncompatibleChromosome(GeneticsError):pass
+
+
 
 class Individual:
 	def __init__(self,size):#give the size of the solution (it's suposed to be the same as the size of the set of integers)

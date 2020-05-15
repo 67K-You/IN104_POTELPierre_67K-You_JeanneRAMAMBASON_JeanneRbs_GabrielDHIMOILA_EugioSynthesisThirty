@@ -31,7 +31,7 @@ class Individual:
 			raise IncompatibleChromosome, "size of parent_b and self.chromosone must agree"
 		i=rand.randint(0,n-1)
 		enfant=np.zeros(n)
-		enfant[0:i]=self[0:i]
+		enfant[0:i]=self.chrosomone[0:i]
 		enfant[i+1:n-1]=parent_b[i+1:n-1]
 		return enfant
 

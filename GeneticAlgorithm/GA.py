@@ -23,6 +23,15 @@ class Individual:
 		for i in range(1,self.size+1):
 			if random.uniform(0,1)<=p:
 				self.chromosome[i]=abs(self.chromosome[i]-1)
+	
+	def crossover_individuals(self,parent_b):
+		n=self.size
+		i=rand.randint(0,n-1)
+		enfant=np.zeros(n)
+		enfant[0:i]=self[0:i]
+		enfant[i+1:n-1]=parent_b[i+1:n-1]
+		self.enfant=enfant
+
 
 	def evaluate_fitness(self,mu):#the fitness function is designed to maximise the number of integers chosen and minimise the value of their sum. mu is a parameter between 0 and 1 that's meant to give a strong advanage to a solution whose sum is actually 0.
 		n=np.dot(self.chromosome,np.ones((self.size,1)))

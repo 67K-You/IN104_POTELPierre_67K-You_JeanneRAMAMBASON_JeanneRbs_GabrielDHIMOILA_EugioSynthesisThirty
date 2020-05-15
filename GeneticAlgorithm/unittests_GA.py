@@ -14,6 +14,10 @@ class Testindividual(unittest.TestCase):
 	   """Individual.__init__ should fail with negative input"""
 	   with self.assertRaises(OutOfRangeError):
 			Individual(-1)
+	def testcrossover_individuals(self):
+		""" crossover_individuals should fail if parent_b doesn't have the same size as self.chromosone"""
+		      with self.assertRaises(IncompatibleChromosome):
+				Individual.crossover_individuals(self.chromosone+[0])
 
 class Testpopulation(unittest.TestCase):
 	def testpopulationsizeinteger(self):

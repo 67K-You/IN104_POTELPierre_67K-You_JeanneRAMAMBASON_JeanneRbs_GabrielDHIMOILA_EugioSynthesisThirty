@@ -88,16 +88,15 @@ class Population:
 			return i 
 
 class Generations:
-	def __init__(self,generationsnumber,populationsize):
+	def __init__(self,generationsnumber,populationsize,chromosomesize):
 		if generationsnumber<0:
 			raise OutOfRangeError, "generationsnumber must be a positive number"
 		elif not generationsnumber == int(generationsnumber):
 			raise NotIntegerError, "generationsnumber must be an integer"
 		self.size=generationsnumber
-		self.generations=np.array(generationsnumber,populationsize,dtype=numpy.object)
+		self.generations=np.array(generationsnumber,dtype=numpy.object)
 		for i in range(0,generationsnumber):
-			for j in range(0,populationsize):
-				self.generations[i,j]=Individual(chromosomesize)
+				self.generations[i]=Population(populationsize,chromosomesize)
 	
 	
 	

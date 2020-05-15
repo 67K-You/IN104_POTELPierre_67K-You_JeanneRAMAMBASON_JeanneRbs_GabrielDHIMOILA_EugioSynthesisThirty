@@ -29,6 +29,16 @@ class Testpopulation(unittest.TestCase):
 	   with self.assertRaises(OutOfRangeError):
 			Population(-1,1)
 
+class Testgenerations(unittest.TestCase):
+	def testgenrationsnumberinteger(self):
+	   """Generations.__init__ should fail with non-integer input"""
+	   with self.assertRaises(NotIntegerError):
+			Generations(0.8,1)
+	def testgenerationsnumberpositive(self):
+	   """Generations.__init__ should fail with negative input"""
+	   with self.assertRaises(OutOfRangeError):
+			Generations(-1,1)
+
 
 if __name__ == "__main__":
 	unittest.main()

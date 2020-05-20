@@ -14,7 +14,7 @@ def txttoarray(file):#convert the txt input to an array
 
 class Individual:
 	def __init__(self,size):#give the size of the solution (it's suposed to be the same as the size of the set of integers)
-		if size<0:
+		if size<=0:
 			raise OutOfRangeError, "chromosomesize can't be a negative number"
 		elif not size == int(size):
 			raise NotIntegerError, "chromosomesize can't be a decimal number"

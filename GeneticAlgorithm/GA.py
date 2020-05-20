@@ -9,7 +9,7 @@ class NotIntegerError(GeneticsError): pass
 class IncompatibleChromosome(GeneticsError):pass
 
 def txttoarray(file):#convert the txt input to an array
-	setofintegers=np.loadtxt(file,skiprow=1)
+	setofintegers=np.loadtxt(file,skiprows=1,delimiter=', ')
 	return setofintegers
 
 class Individual:
@@ -21,7 +21,7 @@ class Individual:
 		self.size=size
 
 	def setrandom_individuals(self): #initialises the value of chromosome with 0 and 1 chosen at following a random uniform distribution
-		self.chromosome=np.random.randint(2, self.size)
+		self.chromosome=np.random.randint(2, size=self.size)
 
 	def mutate_individuals(self): #randomly invert one of the allele of the chromosome
 		p=1/self.size
@@ -33,40 +33,41 @@ class Individual:
 		n=self.size
 		m=np.size(parent_b)
 		if m!=n :
-			raise IncompatibleChromosome, "size of parent_b and self.chromosone must agree"
-		i=rand.randint(0,n-1)
-		j=rand.randint(0,n-1)
+			raise IncompatibleChromosome, "size of parent_b and self.chromosome must agree"
+		i=random.randint(0,n-1)
+		j=random.randint(0,n-1)
 		enfant=np.zeros(n)
-		s=random()
+		s=random.random()
 		if i>j:
 			temp=i
 			i=j
 			j=temp
 		if s<0.5:
 			if i!=j:
-				enfant[0:i]=self.chrosomone[0:i]
+				enfant[0:i]=self.chromosome[0:i]
 				enfant[i+1:j]=parent_b[i+1:j]
 				if j<n:
-					enfant[j+1:n-1]=self.chromosone[j+1:n-1]
+					enfant[j+1:n-1]=self.chromosome[j+1:n-1]
 			else:
-				enfant[0:i]=self.chrosomone[0:i]
+				enfant[0:i]=self.chromosome[0:i]
 				enfant[i+1:n-1]=parent_b[i+1:n-1]
 		else:
 			if i!=j:
 				enfant[0:i]=parent_b[0:i]
-				enfant[i+1:j]=self.chrosomone[i+1:j]
+				enfant[i+1:j]=self.chromosome[i+1:j]
 				if j<n:
 					enfant[j+1:n-1]=parent_b[j+1:n-1]
 			else:
 				enfant[0:i]=parent_b[0:i]
-				enfant[i+1:n-1]=self.chrosomone[i+1:n-1]		
+				enfant[i+1:n-1]=self.chromosome[i+1:n-1]		
 		return enfant
 
 
-	def evaluate_fitness(self,mu):#the fitness function is designed to maximise the number of integers chosen and minimise the value of their sum. mu is a parameter between 0 and 1 that's meant to give a strong advanage to a solution whose sum is actually 0.
-		n=np.dot(self.chromosome,np.ones((self.size,1)))
+	def evaluate_fitness(self,mu,setofintegers):#the fitness function is designed to maximise the number of integers chosen and minimise the value of their sum. mu is a parameter between 0 and 1 that's meant to give a strong advanage to a solution whose sum is actually 0.
+		n=np.dot(self.chromosome,np.ones(self.size))
 		sigma=abs(np.dot(self.chromosome,setofintegers))
 		self.fitnessscore=n/(sigma+mu)
+		return self.fitnessscore
 
 class Population:
 	def __init__(self,populationsize,chromosomesize):#intialise the population of a generation by stocking it in an array of individuals.
@@ -74,23 +75,25 @@ class Population:
 			raise OutOfRangeError, "populationsize can't be a negative number"
 		elif not populationsize == int(populationsize):
 			raise NotIntegerError, "populationsize can't be a decimal number"
-		self.size=populationsize
-		self.generation=np.array(populationsize,dtype=numpy.object)
-		for i in range(0,populationsize):
-			self.generation[i]=Individual(chromosomesize)
+		self.populationsize=populationsize
+		self.generation=[Individual(chromosomesize) for i in range (populationsize)]
+		self.totalcalculated=False
 
 	
-		def choice_crossover(self):
-			total=0
-			for i in range(self.size):
-				total+=self.generation[i].fitnessscore
-			n=random()
-			i=0
-			s=self.generation[0].fitnessscore/total
-			while i<self.size and s<n:
-				i+=1
-				s+=self.generation[i].fitnessscore/total
-			return i 
+	def choice_crossover(self): #randomly chooses 1 parent who is going to breed based on its fitness function
+		if not self.totalcalculated:
+			self.total=0 #it is the sum of all the values of the fitness functions of a population
+			for i in range(self.populationsize):
+				self.total+=self.generation[i].fitnessscore
+			self.totalcalculated=True
+		n=random.random()
+		i=0
+		s=self.generation[0].fitnessscore
+		s=s/self.total
+		while (i<self.populationsize and s<n):
+			i+=1
+			s+=self.generation[i].fitnessscore/self.total
+		return i 
 
 class Generations:
 	def __init__(self,generationsnumber,populationsize,chromosomesize):
@@ -99,9 +102,6 @@ class Generations:
 		elif not generationsnumber == int(generationsnumber):
 			raise NotIntegerError, "generationsnumber must be an integer"
 		self.size=generationsnumber
-		self.generations=np.array(generationsnumber,dtype=numpy.object)
-		for i in range(0,generationsnumber):
-				self.generations[i]=Population(populationsize,chromosomesize)
-	
+		self.generations=[Population(populationsize,chromosomesize) for i in range(generationsnumber)]
 	
 	

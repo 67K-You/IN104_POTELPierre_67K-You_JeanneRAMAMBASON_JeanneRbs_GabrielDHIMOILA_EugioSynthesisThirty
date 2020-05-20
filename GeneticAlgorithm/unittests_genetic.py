@@ -14,35 +14,34 @@ class Testpopulation(unittest.TestCase):
 	def testpopulationsizeinteger(self):
 		"""Population.__init__ should fail with non-integer input"""
 		with self.assertRaises(NotIntegerError):
-			Population(self,0.5,[1,2])
+			Population(0.5,[1,2])
 	
 	def testpopulationsizepositive(self):
 		"""Population.__init__ should fail with negative input"""
 		with self.assertRaises(OutOfRangeError):
-			Population(self,-1,[1,2])
+			Population(-1,[1,2])
 	
 	
 	def testliste(self):
 		"""Population.__init__ should fail if liste is not a type 'list'"""
 		with self.assertRaises(NotListError):
-			Population(self,3,2)
+			Population(3,2)
       
-  class Testget_sub_list(unitest.TestCase):
-		def testlist(self):
-			""" get_sub_list should fail if len(liste)=0"""
-			with self.assertRaises(OutOfRangeError):
-				get_sub_list([])
+class Testget_sub_list(unittest.TestCase):
+	def testlist(self):
+		""" get_sub_list should fail if len(liste)=0"""
+		with self.assertRaises(OutOfRangeError):
+			get_sub_list([])
 		
-		def testpositiveiteration(self):
-			""" get_sub_list should fail if iteration<=0"""
-			with self.assertRaises(OutOfRangeError):
-				get_sub_list([1,2],10,-1)
+	def testpositiveiteration(self):
+		""" get_sub_list should fail if iteration<=0"""
+		with self.assertRaises(OutOfRangeError):
+			get_sub_list([1,2],10,-1)
 				
-		def testintegeriteration(self):
-			"""get_sub_list should fail if iteration is non-integer"""
-			with self.assertRaises(NotIntegerError):
-				get_sub_list([1,2],10,0.5)
+	def testintegeriteration(self):
+		"""get_sub_list should fail if iteration is non-integer"""
+		with self.assertRaises(NotIntegerError):
+			get_sub_list([1,2],10,0.5)
 				
 if __name__ == "__main__":
 	unittest.main()
-

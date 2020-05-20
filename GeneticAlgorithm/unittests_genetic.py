@@ -42,4 +42,7 @@ class Testpopulation(unittest.TestCase):
 			"""get_sub_list should fail if iteration is non-integer"""
 			with self.Raises(NotIntegerError):
 				get_sub_list([1,2],10,0.5)
+				
+if __name__ == "__main__":
+	unittest.main()
 

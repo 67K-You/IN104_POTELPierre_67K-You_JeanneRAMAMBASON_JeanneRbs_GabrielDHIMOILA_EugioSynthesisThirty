@@ -65,7 +65,7 @@ class Individual:
 
 	def evaluate_fitness(self,mu,setofintegers):#the fitness function is designed to maximise the number of integers chosen and minimise the value of their sum. mu is a parameter between 0 and 1 that's meant to give a strong advanage to a solution whose sum is actually 0.
 		if mu<=0:
-			raise OutOfRangeError, "mu must be between 0 and 1"
+			raise OutOfRangeError, "mu must be positive"
 		n=np.dot(self.chromosome,np.ones(self.size))
 		sigma=abs(np.dot(self.chromosome,setofintegers))
 		self.fitnessscore=n/(sigma+mu)

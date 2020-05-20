@@ -18,6 +18,11 @@ class Testindividual(unittest.TestCase):
 		""" crossover_individuals should fail if parent_b doesn't have the same size as self.chromosone"""
 		      with self.assertRaises(IncompatibleChromosome):
 				Individual.crossover_individuals(self,self.chromosone+[0])
+	def testevaluate_fitness(self):
+		""" evaluate_fitness should fail if mu is negative """ 
+		setofintegers=txttoarray('small.txt')
+		with self.assertRaises(OutOfRangeError):
+			Individual.evaluate_fitness(self,-1,setofintegers)
 
 class Testpopulation(unittest.TestCase):
 	def testpopulationsizeinteger(self):

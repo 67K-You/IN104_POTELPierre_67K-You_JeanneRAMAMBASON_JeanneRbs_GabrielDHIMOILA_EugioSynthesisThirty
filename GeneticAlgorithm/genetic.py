@@ -1,6 +1,11 @@
 import random as rand
 from math import *
 
+#Define exceptions
+class OutOfRangeError(GeneticsError): pass
+class NotIntegerError(GeneticsError): pass
+class NotListError(GeneticsError):pass
+
 class Individual:
 	def __init__(self, liste, chromosome = None):
 		self.liste = liste
@@ -33,6 +38,8 @@ class Individual:
 		return self.score
 
 	def mutate(self, rate):
+		if not (0<=rate<=1):
+			raise OutOfRangeError, "rate must be between 0 and 1"
 		for i in range(self.length):
 			if rand.random() < rate:
 				self.chromosome[i] = 1 - self.chromosome[i]
@@ -46,7 +53,13 @@ class Individual:
 
 class Population:
 	def __init__(self, size, liste):
+		if size<0:
+			raise OutOfRangeError, "size can't be a negative number"
+		if int(size)!=size:
+			raise NotIntegerError, "size must be an integer"
 		self.size = size
+		if type(liste)!='list':
+			raise NotListError, "liste must be type 'list'"
 		self.liste = liste
 		self.individuals = [Individual(liste) for i in range(size)]
 		self.best = None
@@ -89,6 +102,12 @@ class Population:
 
 
 def get_sub_list(liste, pop_size = 1000, iterations = 1000, print_progression = False):
+	if len(liste)==0:
+		raise OutOfRangeError, "len(liste) can't be 0"
+	if not (iterations>0):
+		raise OutOfRangeError, "iterations must be positive"
+	if int(iterations)!=iterations:
+		raise NotIntegerError,"iterations must be an integer"
 	pop = Population(pop_size, liste)
 	last_print = -0.01
 	mutation_rate = 1 / len(liste)

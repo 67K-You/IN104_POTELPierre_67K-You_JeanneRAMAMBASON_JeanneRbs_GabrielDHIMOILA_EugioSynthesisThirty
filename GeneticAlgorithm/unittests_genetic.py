@@ -30,17 +30,17 @@ class Testpopulation(unittest.TestCase):
   class Testget_sub_list(unitest.TestCase):
 		def testlist(self):
 			""" get_sub_list should fail if len(liste)=0"""
-			with self.Raises(OutOfRangeError):
+			with self.assertRaises(OutOfRangeError):
 				get_sub_list([])
 		
 		def testpositiveiteration(self):
 			""" get_sub_list should fail if iteration<=0"""
-			with self.Raises(OutOfRangeError):
+			with self.assertRaises(OutOfRangeError):
 				get_sub_list([1,2],10,-1)
 				
 		def testintegeriteration(self):
 			"""get_sub_list should fail if iteration is non-integer"""
-			with self.Raises(NotIntegerError):
+			with self.assertRaises(NotIntegerError):
 				get_sub_list([1,2],10,0.5)
 				
 if __name__ == "__main__":

@@ -17,7 +17,7 @@ class Testindividual(unittest.TestCase):
 	def testcrossover_individuals(self):
 		""" crossover_individuals should fail if parent_b doesn't have the same size as self.chromosone"""
 		      with self.assertRaises(IncompatibleChromosome):
-				Individual.crossover_individuals(self.chromosone+[0])
+				Individual.crossover_individuals(self,self.chromosone+[0])
 
 class Testpopulation(unittest.TestCase):
 	def testpopulationsizeinteger(self):

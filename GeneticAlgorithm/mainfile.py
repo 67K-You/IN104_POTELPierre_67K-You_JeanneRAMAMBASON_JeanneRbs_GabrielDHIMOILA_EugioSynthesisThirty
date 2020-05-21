@@ -62,12 +62,6 @@ if __name__ == "__main__":
 		if np.dot(solutions.generations[i].generation[0].chromosome,setofintegers)==0 and i+1!=indice and np.dot(solutions.generations[i].generation[0].chromosome,np.ones(sizeofchromosome))>nombreentiers:
 			indice=i+1
 			nombreentiers=np.dot(solutions.generations[i].generation[0].chromosome,np.ones(sizeofchromosome))
-		print('somme ')
-		print(np.dot(solutions.generations[i].generation[0].chromosome,setofintegers))
-		print('nombre d entiers ')
-		print(np.dot(solutions.generations[i].generation[0].chromosome,np.ones(sizeofchromosome)))
-		print(solutions.generations[i].generation[0].fitnessscore)
-		print(solutions.generations[i].generation[0].chromosome)
 	print('indice=')
 	print(indice)
 	print('nombre d entiers=')

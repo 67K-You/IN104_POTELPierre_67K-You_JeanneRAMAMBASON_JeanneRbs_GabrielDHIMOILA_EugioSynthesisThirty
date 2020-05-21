@@ -12,7 +12,7 @@ def txttoarray(file):#convert the txt input to an array
 	setofintegers=np.loadtxt(file,skiprows=1,delimiter=', ')
 	return setofintegers
 
-def factor_partial(N):
+def factor_partial(N):#give the two biggest divisors of N under sqrt(N), used in visualisation2 donc make a rectangle ish display
 	for R in xrange(int(np.sqrt(N)),1,-1):
 		if N%R == 0 and np.gcd(R,N/R) == 1:
 			return N/R, R

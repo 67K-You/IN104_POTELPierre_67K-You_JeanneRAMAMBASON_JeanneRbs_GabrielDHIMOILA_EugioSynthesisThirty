@@ -2,7 +2,7 @@ import random as rand
 from threading import Thread
 from math import *
 
-NB_THREADS = 8
+NB_THREADS = 8 # 1 ou 0 = no multi threading
 
 class Individual:
 	def __init__(self, liste, chromosome = None):
@@ -144,7 +144,7 @@ class Population:
 def get_sub_list(liste, pop_size = 1000, generations = 1000, print_progression = False):
 	pop = Population(pop_size, liste)
 	last_print = -0.01
-	mutation_rate = 0.1
+	mutation_rate = 1 / len(liste)
 
 	for i in range(generations):
 		if print_progression and i / generations >= last_print + 0.01:
@@ -170,7 +170,7 @@ if __name__ == "__main__":
 	import time
 	t0 = time.time()
 	print("inputs =", inputs, "\n")
-	outputs, best_generations = get_sub_list(inputs, pop_size = 50, generations = 10, print_progression = True)
+	outputs, best_generations = get_sub_list(inputs, pop_size = 100, generations = 100, print_progression = True)
 	print("\ninputs =", inputs, "\noutputs =", outputs)
 	print()
 	print("\nlength = ", len(outputs), ", sum = ", sum(outputs), ", atteint en ", best_generations, " generations.", sep="")

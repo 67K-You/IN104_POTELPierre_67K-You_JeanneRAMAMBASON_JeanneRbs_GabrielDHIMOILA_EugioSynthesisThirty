@@ -147,7 +147,7 @@ class Population:
 		return str(self.scores)
 
 
-def get_sub_list(liste, pop_size = 1000, generations = 1000, print_progression = False):
+def get_sub_list(liste, pop_size = 10, generations = 50, print_progression = False):
 	pop = Population(pop_size, liste)
 	last_print = -0.01
 	mutation_rate = 1 / len(liste)
@@ -163,9 +163,8 @@ def get_sub_list(liste, pop_size = 1000, generations = 1000, print_progression =
 
 
 if __name__ == "__main__":
-	#inputs = list(set([512 * rand.randint(-512, 512) + rand.randint(-512, 512) for i in range(1000)]))
 	inputs = []
-	file_name = "medium";
+	file_name = "extralarge";
 
 	with open(file_name + ".txt", "r") as file:
 		file.readline()
@@ -179,7 +178,7 @@ if __name__ == "__main__":
 	print("inputs =", inputs, "\n")
 	outputs, best_generations = get_sub_list(inputs, pop_size = 20, generations = 100, print_progression = True)
 
-	with open("solutions/" + file_name + "_output.txt", "w") as file:
+	with open("solutions_gabriel/" + file_name + "_output.txt", "w") as file:
 		file.write(str(outputs))
 
 	print("\ninputs =", inputs, "\noutputs =", outputs)

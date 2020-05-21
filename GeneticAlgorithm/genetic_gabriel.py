@@ -10,7 +10,7 @@ class Individual:
 		self.length = len(liste)
 
 		if chromosome is None:
-			self.chromosome = [int(rand.random() < 0.5) for i in range(self.length)]
+			self.chromosome = [1 for i in range(self.length)]
 		else:
 			self.chromosome = list(chromosome)
 
@@ -36,9 +36,15 @@ class Individual:
 		return self.score
 
 	def mutate(self, rate):
+		s = sum(self.get_sub_list())
+
 		for i in range(self.length):
-			if rand.random() < rate:
+			new_s = s + (1 - 2 * self.chromosome[i]) * self.liste[i]
+			new_rate = rate * (0.1 + abs(s) / (0.01 + abs(new_s)))
+
+			if rand.random() < new_rate:
 				self.chromosome[i] = 1 - self.chromosome[i]
+				s = new_s
 
 	def get_sub_list(self):
 		return [self.liste[i] for i, e in enumerate(self.chromosome) if e]
@@ -159,8 +165,9 @@ def get_sub_list(liste, pop_size = 1000, generations = 1000, print_progression =
 if __name__ == "__main__":
 	#inputs = list(set([512 * rand.randint(-512, 512) + rand.randint(-512, 512) for i in range(1000)]))
 	inputs = []
+	file_name = "medium";
 
-	with open("extralarge.txt", "r") as file:
+	with open(file_name + ".txt", "r") as file:
 		file.readline()
 		line = file.readline()
 		inputs = line.split(", ")
@@ -170,8 +177,11 @@ if __name__ == "__main__":
 	import time
 	t0 = time.time()
 	print("inputs =", inputs, "\n")
-	outputs, best_generations = get_sub_list(inputs, pop_size = 100, generations = 100, print_progression = True)
+	outputs, best_generations = get_sub_list(inputs, pop_size = 20, generations = 100, print_progression = True)
+
+	with open("solutions/" + file_name + "_output.txt", "w") as file:
+		file.write(str(outputs))
+
 	print("\ninputs =", inputs, "\noutputs =", outputs)
-	print()
 	print("\nlength = ", len(outputs), ", sum = ", sum(outputs), ", atteint en ", best_generations, " generations.", sep="")
 	print("programme terminé en", time.time() - t0, "s.")

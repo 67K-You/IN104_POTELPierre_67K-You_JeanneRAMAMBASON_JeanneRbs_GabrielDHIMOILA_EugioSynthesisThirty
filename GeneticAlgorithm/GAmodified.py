@@ -26,10 +26,14 @@ class Individual:
 		self.size=size
 
 	def setrandom_individuals(self,setofintegers): #initialises the value of chromosome with 0 and 1 chosen at following a random uniform distribution
-		self.chromosome=np.random.randint(2, size=self.size)
+		self.chromosome=np.zeros(self.size)
+		for i in range (self.size):
+			n=random.random()
+			if (n>0.5 and setofintegers[i]>=0) or (n>0.995 and setofintegers[i]<0):
+				self.chromosome[i]=1
 
 	def mutate_individuals(self): #randomly invert one of the allele of the chromosome
-		p=10/self.size
+		p=1/self.size
 		for i in range(0,self.size):
 			if random.uniform(0,1)<=p:
 				self.chromosome[i]=abs(self.chromosome[i]-1)

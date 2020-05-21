@@ -26,8 +26,9 @@ file=file+'.txt'
 numberofgenerations=50
 sizeofpopulation=30
 mu=0.02
-visualisation1=False
-visualisation2=False
+visualisation1=False #plots the fitnessscore of a whole population as a graph which goes to the next generation every second
+visualisation2=False #shows a visual representation of the pick rate of the integers which goes to the next generation every second
+#both visualisations output a mp4 video in the current working directory
 
 #Genetic Algorithm
 if __name__ == "__main__":

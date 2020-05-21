@@ -29,7 +29,7 @@ class Individual:
 		self.chromosome=np.zeros(self.size)
 		for i in range (self.size):
 			n=random.random()
-			if (n>0.5 and setofintegers[i]>=0) or (n>0.995 and setofintegers[i]<0):
+			if (n>0.2 and setofintegers[i]>=0) or (n>0.995 and setofintegers[i]<0):
 				self.chromosome[i]=1
 
 	def mutate_individuals(self): #randomly invert one of the allele of the chromosome

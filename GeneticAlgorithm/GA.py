@@ -25,11 +25,15 @@ class Individual:
 			raise NotIntegerError, "chromosomesize can't be a decimal number"
 		self.size=size
 
-	def setrandom_individuals(self,setofintegers): #initialises the value of chromosome with 0 and 1 chosen at following a random uniform distribution
-		self.chromosome=np.random.randint(2, size=self.size)
+	def setrandom_individuals(self,setofintegers): #initialises the value of chromosome with 0 and 1 chosen at following a random uniform distribution where p=0.95 (1 is success p is failure)
+		self.chromosome=np.ones(self.size)
+		for i in range(self.size):
+			n=random.random()
+			if n<0.2:
+				self.chromosome[i]==0
 
 	def mutate_individuals(self): #randomly invert one of the allele of the chromosome
-		p=10/self.size
+		p=1/self.size
 		for i in range(0,self.size):
 			if random.uniform(0,1)<=p:
 				self.chromosome[i]=abs(self.chromosome[i]-1)

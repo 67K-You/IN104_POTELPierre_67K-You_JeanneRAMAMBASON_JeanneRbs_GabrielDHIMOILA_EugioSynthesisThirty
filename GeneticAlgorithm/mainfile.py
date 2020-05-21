@@ -12,9 +12,9 @@ import matplotlib.cm as cm
 #Define global variables
 t=time.time()
 #file='small'
-file='medium'
+#file='medium'
 #file='large'
-#file='extraLarge'
+file='extraLarge'
 #file=file+'Rand'
 if file=='large':
 	import GAmodified
@@ -22,9 +22,11 @@ if file=='large':
 else:
 	import GA
 	from GA import *
+output=file
+output=output+'sol.out'
 file=file+'.txt'
-numberofgenerations=10
-sizeofpopulation=1500
+numberofgenerations=50
+sizeofpopulation=30
 mu=0.02
 visualisation1=False
 visualisation2=False
@@ -49,6 +51,7 @@ if __name__ == "__main__":
 	elapsed=time.time()-t
 	print(elapsed)#print how much time the genetic algorithm takes
 
+
 #only for animation and visualisation purpose
 #data treatment no genetic algorithmic involved
 	somme=0
@@ -70,6 +73,7 @@ if __name__ == "__main__":
 	print('nombre d entiers=')
 	print(nombreentiers)
 	print(elapsed)
+	np.savetxt(output,solutions.generations[indice-1].generation[0].chromosome,delimiter=', ')
 	if visualisation1: 
 
 		fig, ax = plt.subplots()
